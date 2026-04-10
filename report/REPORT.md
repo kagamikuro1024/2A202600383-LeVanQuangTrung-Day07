@@ -50,14 +50,14 @@
 
 | # | Tên tài liệu | Nguồn | Số ký tự | Metadata đã gán |
 |---|--------------|-------|----------|-----------------|
-| 1 | `Laws-of-the-Game-2025_26_single-pages.md` | Sách PDF IFAB | ~205.100 | Vâng, toàn bộ hệ thống siêu dữ liệu đa dạng |
+| 1 | `Laws-of-the-Game-2025_26_single-pages.md` | Sách PDF IFAB | ~205.100 | law_number`, `is_new_rule_2025_26`, `importance`, `tags` |
 
 
 ### Metadata Schema
 
 | Trường metadata | Kiểu | Ví dụ giá trị | Tại sao hữu ích cho retrieval? |
 |----------------|------|---------------|-------------------------------|
-| `law_number` | Integer | 3, 12 | Giúp lọc nhanh khi câu hỏi liên quan cụ thể tới Rule số mấy |
+| `law_number` | Integer | 3, 12 | Giúp lọc nhanh khi câu hỏi liên quan cụ thể tới Rule số mấy |,[]
 | `is_new_rule_2025_26` | Boolean | True, False | Có thể dùng filter dọn bớt thông tin cũ, chốt thông tin luật thử nghiệm của 2025/26. |
 | `importance` | String | 'high', 'medium' | Giúp Agent ranking ưu tiên các core rule hơn là những comment hoặc rule phụ lẻ tẻ. |
 | `tags` | String | 'captain, goalkeeper' | Hỗ trợ tìm kiếm theo Keyword đối tượng. |
