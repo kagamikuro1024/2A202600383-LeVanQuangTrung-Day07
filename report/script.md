@@ -27,7 +27,7 @@
 >
 > Bọn mình cũng có câu hỏi y hệt. Và mình đã làm 1 phương pháp **True Baseline (No-Chunking)**: Nghĩa là nhét toàn bộ 205.000 ký tự của cuốn sách luật vào làm 1 Chunk duy nhất và đưa qua mô hình `all-MiniLM-L6-v2`.
 > 
-> **Kết quả? Sụp đổ hoàn toàn (0% chính xác).** 
+> **Kết quả? Điểm tương đồng cực thấp (~0.38) và sai lệch hoàn toàn.** 
 > 
 > Bất kể mình hỏi về thủ môn, thẻ phạt hay trang phục, mô hình luôn trả về kết quả y hệt nhau, đó là danh sách Mục lục ở trang số 1. Vì sao lại thế?
 > 1. **Giới hạn số token (Max Sequence Length):** Các mô hình Embedding không phải là cái túi không đáy. Model Local này thường giới hạn đọc 256 hoặc 512 token cùng lúc. Đưa 205.000 ký tự vào, nó chỉ đọc được trang đầu tiên rồi 'cắt cụp' (truncate) toàn bộ phần còn lại. Mọi nội dung bị mất trắng.
@@ -57,14 +57,14 @@
 **Người nói:**
 > "Và đây là kết quả đối đầu thực tế sau khi chạy qua 5 câu hỏi khó nhằn. Chuyện thú vị bắt đầu lộ diện:
 >
-> **Bất ngờ số 1: Chiến thuật logic nhất lại thất bại.** Việc chia theo 3 câu của Nghĩa lại có hiệu năng thấp nhất (65%). Văn phong luật pháp luôn sử dụng các câu cực kỳ dài và phức tạp (ví dụ câu liệt kê trường hợp). Việc chặt ngang đếm đúng 3 dấu chấm đã vô tình xé rách ngữ cảnh của một điều luật thành 2 nửa.
+> **Bất ngờ số 1: Chiến thuật chia theo câu có điểm số khiêm tốn.** Việc chia theo 3 câu của Nghĩa đạt điểm similarity trung bình khoảng 0.670. Văn phong luật pháp luôn sử dụng các câu cực kỳ dài và phức tạp (ví dụ câu liệt kê trường hợp). Việc chặt ngang đếm đúng 3 dấu chấm đã vô tình xé rách ngữ cảnh của một điều luật thành 2 nửa.
 > 
-> **Thực tế số 2: Đơn giản vẫn sống tốt.** Phương pháp chia tản mạn 256 ký tự của Minh (Baseline) vẫn trả ra kết quả xấp xỉ 74%. Tuy nhiên ở câu hỏi ngách (ví dụ: Q2: Nếu đội trưởng đồng thời là thủ môn), phương pháp này gục ngã vì đoạn text này bị chia làm 2 chunk, AI không ghép lại được.
+> **Thực tế số 2: Đơn giản vẫn sống tốt.** Phương pháp chia tản mạn 256 ký tự của Minh (Baseline) vẫn trả ra kết quả điểm tương đồng khá tốt (0.702). Tuy nhiên ở câu hỏi ngách (ví dụ: Q2: Nếu đội trưởng đồng thời là thủ môn), phương pháp này gục ngã vì đoạn text này bị chia làm 2 chunk, AI không ghép lại được.
 >
-> **Lợi thế số 3: Context lớn có tốt?** Chiến lược 512 ký tự của Vinh giúp vượt qua mọi câu khó lấy lại ngữ cảnh (đạt 83%). Điểm trừ là khi nạp Context khổng lồ này cho LLM đằng sau, nó chứa cực kỳ nhiều nhiễu, nguy cơ rủi ro hallucination cao.
+> **Lợi thế số 3: Recursive giúp ổn định.** Chiến lược 512 ký tự của Vinh giúp vượt qua mọi câu khó lấy lại ngữ cảnh (đạt score 0.695). Điểm trừ là khi nạp Context khổng lồ này cho LLM đằng sau, nó chứa cực kỳ nhiều nhiễu, nguy cơ rủi ro hallucination cao.
 >
-> **🏆 Nhà Vô Địch: Trung với Hybrid Smart (Đạt 89-90%).** 
-> Phương pháp của mình luôn tìm ra được kết quả chuẩn nhất, đặc biệt đập nát Câu hỏi số 4 (Hỏi về luật 8 giây mới nhất năm tới). Tại sao? Thay vì tìm kiếm mù quáng, nhờ có dán nhãn thông minh (tagging 'is_new_rule_2025_26'), cơ sở dữ liệu đã tự động filter ưu tiên lọc dòng luật mới cập nhật nhất, đẩy điểm số relevance lên tuyệt đối."
+> **🏆 Nhà Vô Địch: Trung với Hybrid Smart (Score 0.70 - 0.80).** 
+> Phương pháp của mình luôn tìm ra được kết quả chuẩn nhất, đặc biệt đập nát Câu hỏi số 5 (Hỏi về luật thay người bù giờ do chấn thương não). Tại sao? Thay vì tìm kiếm mù quáng, nhờ có dán nhãn thông minh (tagging 'is_new_rule_2025_26'), cơ sở dữ liệu đã tự động filter ưu tiên lọc dòng luật mới cập nhật nhất, đẩy điểm số relevance lên đến 0.799.
 
 ---
 

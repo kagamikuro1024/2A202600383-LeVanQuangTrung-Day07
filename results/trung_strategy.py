@@ -1,13 +1,17 @@
 import json
 import re
 from pathlib import Path
+from dotenv import load_dotenv
 from src import (
     FixedSizeChunker, 
     Document, 
     EmbeddingStore,
     KnowledgeBaseAgent,
-    LocalEmbedder
+    LocalEmbedder,
+    OpenAIEmbedder
 )
+
+load_dotenv()
 
 def mock_llm(prompt):
     start = prompt.find("Context:\n") + 9
@@ -52,8 +56,9 @@ def main():
     print(f"[TRUNG] Total chunks: {len(chunks)}")
     print(f"[TRUNG] Avg chunk size: {sum(len(c) for c in chunks) / len(chunks):.0f} chars")
 
-    embedder = LocalEmbedder("all-MiniLM-L6-v2")
-    store = EmbeddingStore(collection_name="trung_store", embedding_fn=embedder)
+    print("[TRUNG] Using OpenAI Embedder (text-embedding-3-small)...")
+    embedder = OpenAIEmbedder()
+    store = EmbeddingStore(collection_name="trung_openai_store", embedding_fn=embedder)
 
     docs_to_add = []
     for i, chunk in enumerate(chunks):
@@ -105,11 +110,27 @@ def main():
     print("="*80)
 
     results = {}
+    print(f"{'#':<3} | {'Query':<30} | {'Score':<6} | {'Top-1 Chunk (Preview)':<40}")
+    print("-" * 88)
+    
     for q_id, query in enumerate(queries, 1):
+        # Lấy Top-1 để lấy Score
+        search_results = store.search(query, top_k=1)
+        top_score = search_results[0]['score'] if search_results else 0.0
+        top_chunk = search_results[0]['content'] if search_results else ""
+        
+        # Lấy câu trả lời từ Agent
         answer = agent.answer(query, top_k=3)
+        
+        # In ra màn hình từng dòng của bảng
+        chunk_preview = top_chunk[:37].replace('\n', ' ') + "..."
+        query_preview = (query[:27] + "...") if len(query) > 30 else query
+        print(f"{q_id:<3} | {query_preview:<30} | {top_score:<6.3f} | {chunk_preview:<40}")
+        
         results[q_id] = {
             "query": query,
             "answer": answer,
+            "score": top_score,
             "strategy": "FixedSizeChunker_384_48_Smart"
         }
 
@@ -117,7 +138,9 @@ def main():
     with open(results_file, 'w', encoding='utf-8') as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
 
-    print(f"\n✅ Results saved: {results_file}")
+    print("-" * 88)
+    print(f"\n[OK] Results saved: {results_file}")
+    print("INFO: Ban co the copy cot Score o tren de dien vao bao cao REPORT.md")
 
 if __name__ == "__main__":
     main()

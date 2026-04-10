@@ -11,7 +11,7 @@
 ### Cosine Similarity (Ex 1.1)
 
 **High cosine similarity nghĩa là gì?**
-> *Viết 1-2 câu:* Cosine similarity cao (gần 1.0) có nghĩa là hai vector đại diện hướng về cùng một phía trong không gian vector đa chiều, cho thấy hai câu văn bản có ý nghĩa và bối cảnh rất giống nhau.
+> *Viết 1-2 câu:* Cosine similarity cao (gần 1.0) có nghĩa là hai vector đại diện hướng về cùng một phía trong không gian vector đa chiều. Điều đó cho thấy hai câu văn bản có ý nghĩa và bối cảnh rất giống nhau.
 
 **Ví dụ HIGH similarity:**
 - Sentence A: "The quick brown fox jumps over the lazy dog"
@@ -72,9 +72,9 @@ Chạy `ChunkingStrategyComparator().compare()` trên 2-3 tài liệu:
 
 | Tài liệu | Strategy | Chunk Count | Avg Length | Preserves Context? |
 |-----------|----------|-------------|------------|-------------------|
-| Luật Mẫu | FixedSizeChunker (`fixed_size`) | 277 | 200 | Khá tốt (nhưng dễ bị cụt câu chữ) |
-| Luật Mẫu | SentenceChunker (`by_sentences`) | 192 | 260 | Bình thường (câu văn luật quá phức tạp) |
-| Luật Mẫu | RecursiveChunker (`recursive`) | 288 | 185 | Tốt nhất trên text dài không dự đoán được định dạng |
+| Luật Mẫu | FixedSizeChunker (`fixed_size`) | 1140 | 199.9 | Khá tốt (nhưng dễ bị cụt câu chữ) |
+| Luật Mẫu | SentenceChunker (`by_sentences`) | 271 | 755.8 | Bình thường (câu văn luật quá phức tạp) |
+| Luật Mẫu | RecursiveChunker (`recursive`) | 1445 | 152.4 | Tốt nhất trên text dài không dự đoán được định dạng |
 
 ### Strategy Của Tôi
 
@@ -86,7 +86,7 @@ Chạy `ChunkingStrategyComparator().compare()` trên 2-3 tài liệu:
 
 **Tại sao tôi chọn strategy này cho domain nhóm?**
 > *Viết 2-3 câu: domain có pattern gì mà strategy khai thác?*
-> Text tài liệu kỹ thuật luật lệ khá dài, kích thước 384 vừa đủ gom 1 quy định (1 điều khoảng). Các bộ Rules thường có đặc thù phân biệt (ví dụ dành riêng cho thủ môn, chỉ đạo...), nên việc có metadata bổ trợ lọc pre-filter giúp Embedder không bị lạc nhịp.
+> Text tài liệu kỹ thuật luật lệ khá dài, kích thước 384 vừa đủ gom 1 quy định (1 điều khoản). Các bộ Rules thường có đặc thù phân biệt (ví dụ dành riêng cho thủ môn, chỉ đạo...), nên việc có metadata bổ trợ lọc pre-filter giúp Embedder không bị lạc nhịp.
 
 **Code snippet (nếu custom):**
 ```python
@@ -103,18 +103,18 @@ def is_new_rule(text):
 
 | Tài liệu | Strategy | Chunk Count | Avg Length | Retrieval Quality? |
 |-----------|----------|-------------|------------|--------------------|
-| Laws-of-the-Game | Baseline Minh | 916 | 256 | Hiệu suất ~ 74% |
-| Laws-of-the-Game | **Của tôi** | 611 | 384 | Đạt 89-90% - Tốt nhất |
+| Laws-of-the-Game | Baseline Minh | 916 | 255.9 | Đạt 7.0/10 (Tiêu chuẩn) |
+| Laws-of-the-Game | **Của tôi** | 611 | 383.6 | Đạt 7.5/10 - Tốt nhất với Metadata |
 
 ### So Sánh Với Thành Viên Khác
 
 | Thành viên | Strategy | Retrieval Score (/10) | Điểm mạnh | Điểm yếu |
 |-----------|----------|----------------------|-----------|----------|
-| Tôi (Trung)| Hybrid Smart | 8.9/10 | Metadata mạnh, đánh tag thông minh. | Code phức tạp, đòi hỏi hardcode lúc ban đầu. |
-| [Vinh] | Recursive 512 | 8.0/10 | Giữ form ngữ cảnh lớn tốt. | Gây nhiễu vector quá nhiều context phụ. |
-| [Đạt] | Balanced 256 | 7.5/10 | Cân bằng tốt giữa Context và Granularity. | Overhead so với Fixed-size, ít Metadata. |
-| [Minh] | Baseline 256 | 6.5/10 | Build nhanh, đơn giản, làm tiêu chuẩn tốt. | Cắt chunk mù quáng (làm mất câu), không có Metadata. |
-| [Nghĩa] | Sentence 3 | 5.5/10 | Logic rất hợp tự sự. | Text pháp lý quá phức tạp làm bể nát nghĩa. |
+| Tôi (Trung)| Hybrid Smart | 7.5/10 | Metadata mạnh, đánh tag thông minh. | Code phức tạp, đòi hỏi hardcode lúc ban đầu. |
+| [Vinh] | Recursive 512 | 7.0/10 | Giữ form ngữ cảnh lớn tốt. | Gây nhiễu vector quá nhiều context phụ. |
+| [Đạt] | Balanced 256 | 7.2/10 | Cân bằng tốt giữa Context và Granularity. | Overhead so với Fixed-size, ít Metadata. |
+| [Minh] | Baseline 256 | 7.0/10 | Build nhanh, đơn giản, làm tiêu chuẩn tốt. | Cắt chunk mù quáng (làm mất câu), không có Metadata. |
+| [Nghĩa] | Sentence 3 | 6.7/10 | Logic rất hợp tự sự. | Text pháp lý quá phức tạp làm bể nát nghĩa. |
 
 ### Strategy nào tốt nhất cho domain này? Tại sao?
 > Strategy của Trung đạt tối ưu vì nó khai thác đúng được Semantic điểm đen của mô hình LLM. Phương pháp này bù đắp bằng khả năng "phân luồng văn bản" của thẻ Tags metadata và Importance Score chứ không chỉ dựa vào Embedder Similarity thuần túy.
@@ -173,14 +173,14 @@ tests/test_solution.py::TestEmbeddingStoreDeleteDocument::test_delete_returns_tr
 
 | Pair | Sentence A | Sentence B | Dự đoán | Actual Score | Đúng? |
 |------|-----------|-----------|---------|--------------|-------|
-| 1 | I like football | I love playing soccer | high | 0.81 | Đúng |
-| 2 | Code is poetry | To program is to tell a story | medium | 0.52 | Đúng |
-| 3 | AI will replace jobs | Artificial intelligence is automating labor | high | 0.79 | Đúng |
-| 4 | The cake is very sweet | Tomorrow it will rain all day | low | 0.03 | Đúng |
-| 5 | Water boils at 100 degrees Celsius | H2O becomes vapor at 212 Fahrenheit | high | 0.75 | Đúng |
+| 1 | The referee awarded a penalty kick for a foul | A penalty was given by the referee after a foul | High | **0.93** | Đúng |
+| 2 | The official showed a yellow card to the player | The referee cautioned the player with a yellow card | High | **0.88** | Đúng |
+| 3 | The striker scored a goal in the first half | A goal was scored by the forward early in the match | High | **0.78** | Đúng |
+| 4 | Law 12 covers fouls and misconducts | The stadium must have enough seats for fans | Low | **0.19** | Đúng |
+| 5 | The match ended in a draw | I like to eat pizza while watching football | Low | **0.23** | Đúng |
 
 **Kết quả nào bất ngờ nhất? Điều này nói gì về cách embeddings biểu diễn nghĩa?**
-> *Viết 2-3 câu:* Bất ngờ nhất là Pair 5, mô hình hiểu rất tốt "Water" = "H2O" và "100 Celsius" = "212 Fahrenheit". Embedding thể hiện nó đã được train trên đủ kho dữ liệu lớn để ánh xạ mối liên kết ngữ nghĩa giữa hai đơn vị đo lường hay công thức hóa học khác nhau chứ không chỉ so xem từ vựng có giống nhau hay không.
+> *Viết 2-3 câu:* Bất ngờ nhất là Pair 1 và 2 đạt điểm số gần như tuyệt đối (>0.85). Điều này cho thấy mô hình cực kỳ nhạy bén trong việc nhận diện các cấu trúc câu bị động/chủ động hoặc các từ khóa kỹ thuật bóng đá tương đồng (official vs referee, awarded vs given). Embedding đã biểu diễn rất tốt ý nghĩa thực sự của hành động trên sân chứ không chỉ bị đánh lừa bởi cách sắp xếp từ ngữ.
 
 ---
 
@@ -202,11 +202,11 @@ Chạy 5 benchmark queries của nhóm trên implementation cá nhân của bạ
 
 | # | Query | Top-1 Retrieved Chunk (tóm tắt) | Score | Relevant? | Agent Answer (tóm tắt) |
 |---|-------|--------------------------------|-------|-----------|------------------------|
-| 1 | Why only team... | so that the referee can explain key decisions, only the captains will be... | >0.70 | Trúng | As captain, they approach the ref to discuss decisions respectfully. |
-| 2 | If captain is GK... | in major situations and following key incidents or decisions: only one player from...| >0.70 | Trúng | Only one player interacts; if GK captain is far, a nominated player interacts instead. |
-| 3 | Which equipment... | The compulsory equipment of a player comprises... shirt, shorts.. | >0.65 | Trúng | Shirt, shorts, socks, footwear, shinguards... |
-| 4 | What is 8-sec... | and the eight seconds begin... visually count down...| >0.85 | Trúng | Goalkeeper has 8 seconds to release the ball or face match restart penalties. (New Rule) |
-| 5 | What is concussion..| f ‘additional permanent concussion substitutions’. This enables teams...| >0.80 | Trúng | Concussion substitutions allow prioritizing player welfare without using normal sub limits. |
+| 1 | Why only team... | so that the referee can explain key decisions, only the captains will be... | 0.650 | Trúng | As captain, they approach the ref to discuss decisions respectfully. |
+| 2 | If captain is GK... | in major situations and following key incidents or decisions: only one player from...| 0.612 | Trúng | Only one player interacts; if GK captain is far, a nominated player interacts instead. |
+| 3 | Which equipment... | rder the player to: • remove the item • leave the field of play at the next stoppage... | 0.694 | Trúng | Shirt, shorts, socks, footwear, shinguards... |
+| 4 | What is 8-sec... | and the eight seconds begin and will visually count down the last five seconds...| 0.756 | Trúng | Goalkeeper has 8 seconds to release the ball or face match restart penalties. (New Rule) |
+| 5 | What is concussion..| f ‘additional permanent concussion substitutions’. This enables teams to prioritise...| 0.799 | Trúng | Concussion substitutions allow prioritizing player welfare without using normal sub limits. |
 
 **Bao nhiêu queries trả về chunk relevant trong top-3?** 5 / 5
 
@@ -215,10 +215,10 @@ Chạy 5 benchmark queries của nhóm trên implementation cá nhân của bạ
 ## 7. What I Learned (5 điểm — Demo)
 
 **Điều hay nhất tôi học được từ thành viên khác trong nhóm:**
-> *Viết 2-3 câu:* Mình học được tư duy test baseline "No Chunking" trực tiếp trên data thực để thấy rõ sự sụp đổ của Vector Embedder khi Context quá dài. Mình cũng rất thích cách bạn Vinh dùng Regex recursive separators có chiều sâu tốt, chia được câu rất mềm.
+> *Viết 2-3 câu:* Mình test và thấy được tư duy "No Chunking" trực tiếp trên data thực để thấy rõ sự sụp đổ của Vector Embedder khi Context quá dài.
 
 **Điều hay nhất tôi học được từ nhóm khác (qua demo):**
-> *Viết 2-3 câu:* Có nhóm sử dụng LLM phụ (hoặc API ChatGPT) để tự generate "Question" dự đoán cho nội dung trước khi nạp vào Vector Store (hay còn gọi là mô hình HyDE). Lúc tìm kiếm, họ search câu hỏi trên các file JSON và lấy chunk. Rất sáng tạo.
+> *Viết 2-3 câu:* Có nhóm sử dụng LLM phụ để tự generate "Question" dự đoán cho nội dung trước khi nạp vào Vector Store. Lúc tìm kiếm, họ search câu hỏi trên các file JSON và lấy chunk.
 
 **Nếu làm lại, tôi sẽ thay đổi gì trong data strategy?**
 > *Viết 2-3 câu:* Nếu làm lại, thay vì extract metadata manual bằng Regex, mình sẽ trích xuất thêm "Parent Section" bằng cách tracking tiêu đề Markdown `## Header`. Sau đó chèn thêm tiêu đề này vào đầu chunk để Vector giữ được thông tin gốc mà không cần mô hình phải tự đoán bối cảnh.
@@ -237,4 +237,4 @@ Chạy 5 benchmark queries của nhóm trên implementation cá nhân của bạ
 | Results | Cá nhân | 10 / 10 |
 | Core implementation (tests) | Cá nhân | 30 / 30 |
 | Demo | Nhóm | 5 / 5 |
-| **Tổng** | | **90 / 100** (Vì báo cáo được hoàn thành vô cùng chính xác - 10 điểm thưởng sự xuất sắc) **100/100** |
+| **Tổng** | | **90 / 100** |
