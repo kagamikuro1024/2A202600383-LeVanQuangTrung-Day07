@@ -1,0 +1,241 @@
+# Football Laws 2025/26 - Benchmark Queries for RAG System
+# Domain: Laws of the Game (Football/Soccer)
+# Document Source: Laws-of-the-Game-2025_26_single-pages.md
+# Total Queries: 5 (Difficulty: Easy, Medium, Hard mix)
+
+================================================================================
+QUERY 1: Only Captain Rule & Player Behavior
+================================================================================
+
+QUESTION:
+Why only the team captain is allowed to talk to the referee after players commit a foul?
+
+DIFFICULTY: ⭐⭐ Medium
+
+EXPECTED CHUNKS TO RETRIEVE:
+- "Stronger collaboration between the referee and the team captains can help instil fairness and mutual respect"
+- "prevent players mobbing or surrounding the referee in major situations and following key incidents or decisions"
+- "improve interactions between the players and the referee, as well as the overall atmosphere on the field of play and the image of the game"
+- "This is vital for the game's future, including the recruitment and retention of referees"
+
+KEY CONCEPTS:
+- Fairness and mutual respect
+- Prevention of player mobbing
+- Improved atmosphere on field
+- Referee retention & recruitment
+
+GOLD ANSWER:
+The 'Only the captain' guidelines ensure fairness and mutual respect by preventing players from mobbing or surrounding the referee. This approach improves interactions between players and referees and enhances the overall atmosphere on the field. Most importantly, these guidelines are vital for the game's future, including the recruitment and retention of referees.
+
+RELATED LAW: 'Only the captain' guidelines (Notes and modifications, pages 24-27)
+
+================================================================================
+QUERY 2: Goalkeeper as Captain Exception (Edge Case)
+================================================================================
+
+QUESTION:
+If the team captain is a goalkeeper, how can they approach the referee to discuss a decision?
+
+DIFFICULTY: ⭐⭐⭐ Hard
+
+EXPECTED CHUNKS TO RETRIEVE:
+- "Where the goalkeeper is the captain, the referee must be told, no later than at the coin toss before kick-off, which player is nominated to approach the referee instead of the goalkeeper"
+- "Only the goalkeeper or the nominated player, not both, may approach the referee"
+- "If the nominated player is substituted or sent off, another player must be nominated"
+
+KEY CONCEPTS:
+- Goalkeeper exemption
+- Nomination procedure before kick-off
+- Mutual exclusivity (GK OR nominated player, not both)
+- Re-nomination requirement
+
+GOLD ANSWER:
+When the goalkeeper is the captain, the referee must be informed at the coin toss before kick-off which player is nominated to approach the referee instead of the goalkeeper. Only the goalkeeper or the nominated player (not both) may approach the referee. If the nominated player is substituted or sent off, another player must be nominated to take their place.
+
+RELATED LAW: Law 3 (The Players) + 'Only the captain' guidelines (page 25)
+
+================================================================================
+QUERY 3: Player Equipment - Mandatory vs Optional
+================================================================================
+
+QUESTION:
+Which equipment is mandatory for players to wear during a match, and which protective equipment is allowed but optional?
+
+DIFFICULTY: ⭐⭐ Medium
+
+EXPECTED CHUNKS TO RETRIEVE:
+
+MANDATORY EQUIPMENT:
+- "a shirt with sleeves"
+- "shorts"
+- "socks – tape or any material applied or worn externally must be the same colour as that part of the sock it is applied to or covers"
+- "shinguards – these must be made of a suitable material and be of an appropriate size to provide reasonable protection and be covered by the socks"
+- "footwear"
+
+OPTIONAL EQUIPMENT:
+- "Non-dangerous protective equipment, for example gloves, headgear, facemasks and knee and arm protectors made of soft, lightweight padded material is permitted"
+- "goalkeepers' caps and sports spectacles"
+- "Goalkeepers may wear tracksuit bottoms"
+- "Where head covers (excluding goalkeepers' caps) are worn, they must be black or the same main colour as the shirt"
+
+PROHIBITED:
+- "All items of jewellery (necklaces, rings, bracelets, earrings, leather bands, rubber bands, etc.) are forbidden and must be removed"
+- "Using tape to cover jewellery is not permitted"
+
+GOLD ANSWER:
+
+MANDATORY (must wear):
+1. Shirt with sleeves
+2. Shorts
+3. Socks (with matching tape/material color)
+4. Shinguards (suitable material, appropriate size, covered by socks)
+5. Footwear
+
+OPTIONAL/ALLOWED (can wear if desired):
+- Gloves
+- Headgear (must be black or match shirt color for non-GK)
+- Facemasks
+- Knee and arm protectors (soft, lightweight padded)
+- Sport spectacles
+- Goalkeeper caps
+- Tracksuit bottoms (goalkeepers only)
+
+PROHIBITED:
+- Any jewelry (necklaces, rings, bracelets, earrings)
+- Tape covering jewelry is NOT allowed
+
+RELATED LAW: Law 4 - The Players' Equipment (pages 63-65)
+
+================================================================================
+QUERY 4: New Goalkeeper 8-Second Rule (2025/26 Rule Change)
+================================================================================
+
+QUESTION:
+What is the new 8-second rule for goalkeepers holding the ball, and what is the consequence if they exceed this time limit?
+
+DIFFICULTY: ⭐⭐ Medium
+
+EXPECTED CHUNKS TO RETRIEVE:
+- "Law 12 has been changed so that goalkeepers will now be penalised if they hold the ball for more than eight seconds, with a corner kick being awarded to the opposition in such cases"
+- "The eight seconds will be strictly enforced by the referee, who will visually count down the last five seconds with the fingers of a raised hand"
+- "a corner kick is an effective deterrent that is easier to manage and can be set up much more quickly than an indirect free kick in the penalty area"
+- "During 2024/25, trials were conducted to deal more effectively with goalkeepers holding the ball for too long"
+
+KEY CONCEPTS:
+- Maximum 8 seconds for goalkeeper to hold ball
+- Corner kick awarded to opposition as consequence
+- Referee visually counts down last 5 seconds with raised hand
+- 2025/26 rule change (NEW)
+- Replaces previous indirect free kick rule
+
+GOLD ANSWER:
+A goalkeeper can hold the ball for a maximum of 8 seconds. If they hold it longer, a corner kick is awarded to the opposing team. The referee will strictly enforce this rule by visually counting down the last five seconds using their raised hand. This rule change for 2025/26 replaced the previous indirect free kick penalty because corner kicks are more effective and easier to manage.
+
+WHY NEW RULE:
+During 2024/25 trials, corner kicks proved to be a more effective deterrent than indirect free kicks and are easier to set up.
+
+RELATED LAW: Law 12 (Fouls and Misconduct) + Notes on Law changes 2025/26 (page 12)
+
+================================================================================
+QUERY 5: Concussion Substitutions & Opposing Team Rights (Complex Rule)
+================================================================================
+
+QUESTION:
+What is an 'additional permanent concussion substitution' and what rights does the opposing team have when one team uses this type of substitution?
+
+DIFFICULTY: ⭐⭐⭐ Hard
+
+EXPECTED CHUNKS TO RETRIEVE:
+- "An additional permanent concussion substitution occurs when a player who has an actual or suspected concussion is substituted and takes no further part in the match"
+- "Each team is permitted to use a maximum of one 'concussion substitute' in a match"
+- "A 'concussion substitution' may be made regardless of the number of substitutes already used"
+- "When a 'concussion substitution' is used, the opposing team then has the option to use an 'additional substitute' for any reason"
+- "The player with concussion or suspected concussion is not permitted to take any further part in the match, including penalties (penalty shoot-out)"
+- "When a 'concussion substitute' is used, the opposing team then has the Procedure option to use an 'additional substitute' and receives an 'additional substitution' opportunity"
+
+KEY CONCEPTS:
+- Concussion substitution is EXTRA (doesn't count toward normal substitution limit)
+- Only 1 per team per match
+- Can be made at any time (before assessment, after assessment, or during play)
+- Does NOT count toward normal substitution opportunities/limits
+- Opposing team gets 1 free additional substitute in response
+- Player with concussion cannot play rest of match (including penalties)
+- Supports player welfare without disadvantaging team
+
+GOLD ANSWER:
+
+WHAT IS CONCUSSION SUBSTITUTION:
+- When a player with actual or suspected concussion is substituted and takes no further part in the match
+- Does NOT count as one of the normal permitted substitutions
+- Each team is allowed a maximum of 1 per match
+- Can be made regardless of how many normal substitutes have already been used
+- Can be made immediately, after assessment, or any time concussion is detected
+
+OPPOSING TEAM RIGHTS:
+- Has the option to use 1 'additional substitute' for ANY reason
+- Receives an 'additional substitution opportunity' (separate from normal limit)
+- Can use this replacement concurrently with the other team's concussion sub or at any time after
+- Does not count against normal substitution limits if not used
+
+PURPOSE:
+This protocol prioritizes player welfare (preventing players from playing with concussions) without creating a numerical disadvantage in the match. Teams are protected from being disadvantaged by having a player removed due to injury/health concerns.
+
+RELATED LAW: Law 3 (The Players) - Additional permanent concussion substitutions + 
+Additional permanent concussion substitutions protocol (pages 34-36)
+
+================================================================================
+BENCHMARK EVALUATION CRITERIA
+================================================================================
+
+For each query, evaluate the RAG system on:
+
+1. RETRIEVAL PRECISION
+   - Did top-3 chunks include the gold answer content?
+   - Were irrelevant chunks retrieved?
+   - Score: 0% (none correct) to 100% (all 3 correct and relevant)
+
+2. CHUNK COHERENCE
+   - Were chunks readable and self-contained?
+   - Did chunking strategy preserve meaning?
+   - No sentence breaks that destroy context
+
+3. COMPLETENESS
+   - Did retrieved chunks contain enough info to answer question fully?
+   - Multi-part questions: were all parts retrieved?
+   - For Query 2 & 5 (hard): completeness is critical
+
+4. RANKING / SIMILARITY SCORE
+   - Was the most relevant chunk ranked #1?
+   - Does score differentiate relevant vs irrelevant chunks effectively?
+
+5. METADATA UTILITY
+   - If using filter by law_number or section, does it improve precision?
+   - Example: Query 4 should prefer documents marked "2025/26 law change"
+
+================================================================================
+NOTES FOR PHASE 2 TEAM
+================================================================================
+
+1. DOCUMENT SELECTION: This benchmark is based only on 
+   "Laws-of-the-Game-2025_26_single-pages.md"
+   
+2. CHUNK PARAMETERS TO TEST:
+   - Query 1-3: Standard chunking (256-512 tokens)
+   - Query 4-5: Larger chunks (512+ tokens) to capture full rule context
+   
+3. METADATA SCHEMA RECOMMENDATION:
+   {
+       "source_file": "Laws-of-the-Game-2025_26_single-pages.md",
+       "law_number": "Law 3",
+       "section": "'Only the captain' guidelines",
+       "topic": "player-behavior|equipment|goalkeeper|substitution|welfare",
+       "year": "2025/26",
+       "is_new_rule": true,  # for 2025/26 changes
+       "difficulty": "medium|hard",
+       "relevance": "high|medium"
+   }
+
+4. EXPECTED INSIGHTS:
+   - Queries 1,3,4 (easier) should have high precision with basic chunking
+   - Queries 2,5 (harder) require larger context/better metadata filtering
+   - Metadata filter by "is_new_rule: true" helps queries 4-5 (2025/26 changes)
